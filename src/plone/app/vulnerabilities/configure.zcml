@@ -6,7 +6,8 @@
            i18n_domain="plone.app.vulnerabilities">
 
   <include package="Products.CMFCore" />
-
+  <include package="plone.app.dexterity" />
+   
   <include package=".browser" />
 
   <gs:registerProfile
