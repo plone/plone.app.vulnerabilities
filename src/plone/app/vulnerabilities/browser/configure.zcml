@@ -1,0 +1,16 @@
+<configure
+	xmlns="http://namespaces.zope.org/browser"
+	xmlns:zope="http://namespaces.zope.org/zope"
+	xmlns:zcml="http://namespaces.zope.org/zcml"	
+	>
+
+		
+	<page 
+		name="hotfix_feed"
+		template="hotfix_feed.pt"
+		class=".hotfixes.HotfixFeed"
+		for="*"
+		permission="zope2.View"
+		/>
+
+</configure>

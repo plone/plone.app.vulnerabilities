@@ -7,6 +7,8 @@
 
   <include package="Products.CMFCore" />
 
+  <include package=".browser" />
+
   <gs:registerProfile
       name="default"
       title="plone.app.vulnerability"
