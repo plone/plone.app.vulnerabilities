@@ -69,6 +69,11 @@
     <link tal:content="obj_item/Identifier">Identifier</link>
     <hotfix_version tal:content="obj_item/hotfix_version | nothing">Hotfix version</hotfix_version>
     <release_date tal:content="obj_item/release_date | nothing">Release Date</release_date>
+    <product_name tal:content="obj_item/product_name | nothing">Product Name</product_name>
+    <product_version tal:content="obj_item/product_version | nothing">Product Version</product_version>
+    <plone_version__s_ tal:content="obj_item/plone_version__s_ | nothing">Plone Version (s)</plone_version__s_>
+    <zope_version tal:content="obj_item/zope_version | nothing">Zope Version</zope_version>
+    <mandatory tal:content="obj_item/mandatory | nothing">Mandatory</mandatory>
     <description tal:content="obj_item/Description">Description</description>
     <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
         tal:condition="has_text"
