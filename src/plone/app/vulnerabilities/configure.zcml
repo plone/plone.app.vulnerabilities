@@ -1,0 +1,18 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           xmlns:gs="http://namespaces.zope.org/genericsetup"
+           i18n_domain="ploneformgen">
+
+  <include package="Products.CMFCore" />
+
+  <gs:registerProfile
+      name="default"
+      title="plone.app.vulnerability"
+      directory="profiles/default"
+      description="Makes it possible to build forms via a through-the-web UI"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
