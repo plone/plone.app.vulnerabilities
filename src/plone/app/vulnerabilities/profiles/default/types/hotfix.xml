@@ -41,10 +41,12 @@
       &lt;/field&gt;
       &lt;field name="product_name" type="zope.schema.TextLine"&gt;
         &lt;description&gt;What product this Hot Fix applies to.&lt;/description&gt;
+        &lt;required&gt;False&lt;/required&gt;
         &lt;title&gt;Product Name&lt;/title&gt;
       &lt;/field&gt;
       &lt;field name="product_version" type="zope.schema.Float"&gt;
         &lt;description /&gt;
+        &lt;required&gt;False&lt;/required&gt;
         &lt;title&gt;Product Version&lt;/title&gt;
       &lt;/field&gt;
       &lt;field name="plone_version__s_" type="zope.schema.List"&gt;
