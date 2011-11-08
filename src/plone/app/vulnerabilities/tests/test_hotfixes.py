@@ -2,6 +2,7 @@ import unittest2 as unittest
 
 from zExceptions import Unauthorized
 from ZPublisher import NotFound
+from Products.CMFCore.WorkflowCore import WorkflowException
 from plone.app.testing import setRoles, TEST_USER_NAME, TEST_USER_ID
 from plone.testing.z2 import Browser
 from plone.app.testing import login, logout
@@ -38,6 +39,7 @@ class TestHotfixes(unittest.TestCase):
         setRoles(plonesite, TEST_USER_ID, ["Contributor"])
         transaction.commit()
         with self.assertRaises(Unauthorized):
+            #import pdb; pdb.set_trace( )
             plonesite.invokeFactory('hotfix', 'h1', title=u"Hotfix 1")
         
         #test for Editor user
@@ -75,6 +77,44 @@ class TestHotfixes(unittest.TestCase):
         transaction.commit()
         with self.assertRaises(Unauthorized):
             plonesite.invokeFactory('hotfix', 'h1', title=u"Hotfix 1")                        
+    
+    #
+    def test_only_manager_can_publish_hotfixes(self):
+        plonesite = self.layer["portal"]
+        workflow = plonesite.portal_workflow
+        login(plonesite, TEST_USER_NAME)
+        setRoles(plonesite, TEST_USER_ID, ["Manager", "Member"])
+        transaction.commit()
+        plonesite.invokeFactory('hotfix', 'h1', title=u"Hotfix 1")
+        transaction.commit()
+        
+        # Change our permissions back to non-manager
+        hotfix = plonesite["h1"]
+        setRoles(plonesite, TEST_USER_ID, ["Authenticated", "Contributor", "Editor", "Member", "Owner", "Reader", "Reviewer", "Site Administrator"])
+        transaction.commit()
+        
+        with self.assertRaises(WorkflowException):
+            workflow.doActionFor(hotfix, 'publish')
+            transaction.commit()
+    
+    # 
+    def test_only_manager_can_preannounce_hotfixes(self):
+        plonesite = self.layer["portal"]
+        workflow = plonesite.portal_workflow
+        login(plonesite, TEST_USER_NAME)
+        setRoles(plonesite, TEST_USER_ID, ["Manager", "Member"])
+        transaction.commit()
+        plonesite.invokeFactory('hotfix', 'h1', title=u"Hotfix 1")
+        transaction.commit()
+        
+        # Change our permissions back to non-manager
+        hotfix = plonesite["h1"]
+        setRoles(plonesite, TEST_USER_ID, ["Authenticated", "Contributor", "Editor", "Member", "Owner", "Reader", "Reviewer", "Site Administrator"])
+        transaction.commit()
+        
+        with self.assertRaises(WorkflowException):
+            workflow.doActionFor(hotfix, 'preannounce')
+            transaction.commit()
     
     def test_publishing_a_hotfix_makes_it_visible_to_anonymous(self):
         plonesite = self.layer["portal"]
