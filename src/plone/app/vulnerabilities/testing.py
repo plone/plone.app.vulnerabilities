@@ -8,7 +8,7 @@ from zope.configuration import xmlconfig
 
 class VulnerabilitiesTests(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_FIXTURE,z2.ZSERVER_FIXTURE)
     
     def setUpZope(self, app, configurationContext):
         # Load ZCML
