@@ -19,6 +19,12 @@
  <state state_id="draft" title="Draft Hotfix state">
   <exit-transition transition_id="preannounce"/>
   <exit-transition transition_id="publish"/>
+  <permission-map name="View" acquired="False">
+    <permission-role>Manager</permission-role>
+    <permission-role>Owner</permission-role>
+    <permission-role>Editor</permission-role>
+    <permission-role>Site Administrator</permission-role>
+  </permission-map>
  </state>
  <state state_id="published" title="Published">
   <description>Visible to everyone, not editable by the owner.</description>
