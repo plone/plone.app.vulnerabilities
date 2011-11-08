@@ -105,7 +105,7 @@ class TestVulnerabilities(unittest.TestCase):
         browser.open(vulnerability.absolute_url())
         self.assertTrue(u"Vulnerability 1" in browser.contents)
     
-    def test_cve_number_calculation(self):
+    def test_cvss_number_calculation(self):
         # Put a definitely failing test here because we don't have any code for this at all yet
         self.assertEquals([1,2], [1,2,3])
     
