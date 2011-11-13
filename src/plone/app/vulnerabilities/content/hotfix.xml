@@ -12,15 +12,5 @@
         <description>Summary of hotfix contents</description>
         <title>Description</title>
       </field>
-      <field name="product_name" type="zope.schema.TextLine">
-        <description>What product this Hot Fix applies to.</description>
-        <required>False</required>
-        <title>Product Name</title>
-      </field>
-      <field name="product_version" type="zope.schema.Float">
-        <description />
-        <required>False</required>
-        <title>Product Version</title>
-      </field>
     </schema>
   </model>
