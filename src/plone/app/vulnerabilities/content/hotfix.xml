@@ -22,49 +22,5 @@
         <required>False</required>
         <title>Product Version</title>
       </field>
-      <field name="plone_version__s_" type="zope.schema.List">
-        <description>Two which version(s) of Plone should this hotfix be applied?</description>
-        <title>Plone Version (s)</title>
-        <value_type type="zope.schema.Choice">
-          <values>
-            <element>4.3</element>
-            <element>4.2</element>
-            <element>4.1.2</element>
-            <element>4.1.1</element>
-            <element>4.1.0</element>
-            <element>4.0.9</element>
-            <element>4.0.8</element>
-            <element>4.0.7</element>
-            <element>4.0.6</element>
-            <element>4.0.5</element>
-            <element>4.0.4</element>
-            <element>4.0.3</element>
-            <element>4.0.2</element>
-            <element>4.0.1</element>
-            <element>4.0.0</element>
-            <element>3.3.6</element>
-            <element>3.3.5</element>
-            <element>3.3.4</element>
-            <element>3.3.3</element>
-            <element>3.3.2</element>
-            <element>3.3.1</element>
-            <element>3.3.0</element>
-          </values>
-        </value_type>
-      </field>
-      <field name="zope_version" type="zope.schema.List">
-        <description>To which version(s) of Zope should this be applied?</description>
-        <title>Zope Version</title>
-        <value_type type="zope.schema.Choice">
-          <values>
-            <element>2.13</element>
-            <element>2.12</element>
-            <element>2.11</element>
-            <element>2.10</element>
-            <element>2.9</element>
-            <element>2.8</element>
-          </values>
-        </value_type>
-      </field>
     </schema>
   </model>
