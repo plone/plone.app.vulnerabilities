@@ -19,5 +19,13 @@
 		permission="zope2.View"
 		/>
 
+	<page 
+		name="view"
+		template="vulnerability.pt"
+		class=".vulnerability.VulnerabilityView"
+		for="plone.app.vulnerabilities.content.vulnerability.IVulnerability"
+		permission="zope2.View"
+		/>
+
 
 </configure>
