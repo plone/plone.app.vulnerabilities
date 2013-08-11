@@ -10,7 +10,9 @@
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
- <property name="allowed_content_types"/>
+ <property name="allowed_content_types">
+   <element value="vulnerability" />
+ </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
  <property name="view_methods">
@@ -23,8 +25,9 @@
  <property name="klass">plone.app.vulnerabilities.content.hotfix.Hotfix</property>
  
  <property name="behaviors">
-  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="plone.app.dexterity.behaviors.metadata.ICategorization" />
+  <element value="plone.app.dexterity.behaviors.metadata.IPublication" />
+  <element value="plone.app.dexterity.behaviors.metadata.IOwnership" />
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>

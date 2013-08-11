@@ -18,4 +18,9 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <adapter for="plone.app.vulnerabilities.content.hotfix.IHotfix"
+           factory="plone.app.vulnerabilities.content.hotfix.NameFromReleaseDate"
+           />
+
+
 </configure>
