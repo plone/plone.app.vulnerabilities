@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="Hotfix" meta_type="Dexterity FTI"
+<object name="hotfix" meta_type="Dexterity FTI"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Hotfix</property>
  <property name="description">Information about a hotfix</property>
