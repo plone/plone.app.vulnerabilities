@@ -3,5 +3,4 @@
  <property name="title">Controls the available content types in your portal</property>
  <object meta_type="Dexterity FTI" name="hotfix" />
  <object meta_type="Dexterity FTI" name="vulnerability" />
- <!-- -*- extra stuff goes here -*- -->
 </object>

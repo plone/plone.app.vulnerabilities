@@ -12,9 +12,9 @@
 
   <gs:registerProfile
       name="default"
-      title="plone.app.vulnerability"
+      title="Security release management (plone.app.vulnerabilities)"
       directory="profiles/default"
-      description="Makes it possible to build forms via a through-the-web UI"
+      description="Manage hotfixes and their associated vulnerabilities"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
