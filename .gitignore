@@ -8,3 +8,5 @@ include/
 lib/
 parts/
 src/Zope2.egg-info/
+
+/var/
