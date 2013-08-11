@@ -1,0 +1,66 @@
+table#vulninfo { 
+    width: 100%;
+    padding: .5em 0;
+}
+
+table#vulninfo td {
+    color: grey;
+    text-align:center;
+    text-transform: uppercase;
+    border: 0;
+    border-bottom:1px solid white;
+    padding: 4px 0 4px 4px;
+}
+
+table#vulninfo th {
+    color: black;
+    text-align: right;
+    border: 0;
+    border-bottom:1px solid white;
+    padding: 4px 4px 4px 0;
+}
+
+table#vulninfo .availability {
+    border-right: 0;
+}
+table#vulninfo .score {
+    border-left: 0;
+}
+
+table#vulninfo .score {
+}
+
+html table#vulninfo td.score {
+    font-size: 140%;
+    font-weight: bold;
+    background-color: #000;
+    white-space: nowrap;
+}
+
+table#vulninfo td.score.low {
+    color: #3F3;
+}
+
+table#vulninfo td.score.medium {
+    color: #FC3;
+    background-color: #333;
+}
+
+table#vulninfo td.score.high {
+    color: #F00;
+}
+
+table#vulninfo td.low {
+    background-color: #3F3;
+    color: black;
+}
+
+table#vulninfo td.medium {
+    background-color: #FC3;
+    color: black;
+}
+
+table#vulninfo td.high {
+    background-color: #F00;
+    color: white;
+}

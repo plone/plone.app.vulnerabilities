@@ -4,6 +4,11 @@
 	xmlns:zcml="http://namespaces.zope.org/zcml"	
 	>
 
+    <browser:resource
+	    name="plone.app.vulnerabilities.vulnerabilities.css"
+	    permission="zope2.View"
+	    file="vulnerabilities.css"
+	    />
 		
 	<page 
 		name="hotfix_feed"
@@ -12,5 +17,6 @@
 		for="*"
 		permission="zope2.View"
 		/>
+
 
 </configure>
