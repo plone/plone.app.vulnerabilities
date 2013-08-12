@@ -44,7 +44,7 @@ class HostfixListing(BrowserView):
         brains = portal_catalog(object_provides=IHotfix.__identifier__)
 
         for brain in brains:
-            if version in brain.getObject().affected_versions:
+            if version in brain.getObject().getAffectedVersions():
                 result.append(brain)
 
         return result

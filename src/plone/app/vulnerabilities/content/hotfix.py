@@ -2,16 +2,28 @@ from zope.interface import Interface,implements
 from plone.dexterity.content import Container
 from zope import schema
 from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
+from Products.CMFCore.utils import getToolByName
+import pkg_resources
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.textfield import RichText
 from plone.directives import form
 from plone.autoform.directives import read_permission
+from plone.autoform.directives import read_permission
+from plone.dexterity.content import Container
+from plone.supermodel import model
+from zope import schema
+from zope.interface import implements
 
+from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
+from plone.app.vulnerabilities.content.vulnerability import IVulnerability
 from plone.app.vulnerabilities.field import ChecksummedFile
 from Products.CMFCore.utils import getToolByName
 
 
 class IHotfix(Interface):
+
+
+class IHotfix(model.Schema):
     """ Marker interface for Hotfixes """
 
     description = schema.Text(title=_(u"Summary"),
@@ -74,3 +86,20 @@ class Hotfix(Container):
         # crude, this prevents the rename page from setting a title
         # on a hotfix which it's not possible to remove
         return
+
+    def getAffectedVersions(self):
+        """ Pull affected versions from the contained vulnerabilities."""
+
+        catalog = getToolByName(self, 'portal_catalog')
+
+        brains = catalog(object_provides=IVulnerability.__identifier__,
+                         path={"query": '/'.join(self.getPhysicalPath())})
+
+        result = []
+        for brain in brains:
+            result.extend(brain.getObject().affected_versions)
+
+        result = sorted(set(result), key=pkg_resources.parse_version)
+        result.reverse()
+
+        return result
