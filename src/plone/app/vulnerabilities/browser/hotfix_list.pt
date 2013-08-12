@@ -9,27 +9,8 @@
 
 <metal:content-core fill-slot="content-core">
     <metal:content-core define-macro="content-core">
-      <style>
-        .good,.bad {
-            font-weight:bold;
-        }
-        
-        .good {
-            background-color:#DFF0D8 !important;
-        }
-        
-        .bad {
-            background-color:#F2DEDE !important;
-        }
-        
-        th {
-            background-color:#EEE;
-            padding:0.5em 1em !important;
-        }
-        
-                                
-      </style>
-      <table class="listing">
+
+      <table id="hotfixes" class="listing">
         <thead>
           <th>Plone version</th>
           <th>Release date</th>
@@ -50,7 +31,7 @@
             </td>
           </tr>
         </tal:versions>
-
+      </table>
     </metal:content-core>
 </metal:content-core>
 

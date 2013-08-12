@@ -39,3 +39,21 @@ table#vulninfo td.high {
     background-color: #F00;
     color: white;
 }
+
+
+table#hotfixes .good,table#hotfixes .bad {
+    font-weight:bold;
+}
+
+table#hotfixes .good {
+    background-color:#DFF0D8 !important;
+}
+
+table#hotfixes .bad {
+    background-color:#F2DEDE !important;
+}
+
+table#hotfixes th {
+    background-color:#EEE;
+    padding:0.5em 1em !important;
+}

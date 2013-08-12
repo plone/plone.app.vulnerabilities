@@ -49,6 +49,3 @@ class HostfixListing(BrowserView):
 
         return result
 
-
-class HotfixView(BrowserView):
-    pass
