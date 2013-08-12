@@ -47,5 +47,5 @@ class HostfixListing(BrowserView):
             if version in brain.getObject().getAffectedVersions():
                 result.append(brain)
 
-        return sorted(result, key=lambda hotfix: hotfix.id)
+        return sorted(result, key=lambda hotfix: hotfix.id, reverse=True)
 
