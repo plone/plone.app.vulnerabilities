@@ -3,7 +3,6 @@ from plone.dexterity.content import Container
 from zope import schema
 from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
 from plone.app.content.interfaces import INameFromTitle
-from plone.namedfile.field import NamedFile
 from plone.app.textfield import RichText
 from plone.supermodel import model
 
