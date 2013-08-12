@@ -21,10 +21,6 @@ class IHotfix(Interface):
     release_date = schema.Date(title=_(u"Release date"),
                                description=_(u"Date the hotfix will be released"))
 
-    read_permission(affected_versions='plone.app.vulnerabilities.hotfix.view_release')
-    affected_versions = schema.List(title=_(u"Affected Plone versions"),
-                                    value_type=schema.Choice(source="plone.app.vulnerabilities.ploneversions"))
-
     read_permission(hotfix='plone.app.vulnerabilities.hotfix.view_release')
     hotfix = ChecksummedFile(title=_(u"Hotfix"),
                         description=_(u"Old-style product tarball for this hotfix"),
