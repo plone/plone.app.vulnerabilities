@@ -7,9 +7,10 @@ from plone.testing.z2 import Browser
 from plone.app.testing import login, logout
 import transaction
 from plone.dexterity.utils import createContentInContainer
-
+from zope.component import getMultiAdapter
 
 from plone.app.vulnerabilities.testing import VULN_POLICY_FUNCTIONAL_TESTING
+
 
 class TestVulnerabilities(unittest.TestCase):
 
@@ -123,7 +124,31 @@ class TestVulnerabilities(unittest.TestCase):
         self.assertTrue(u"Vulnerability 1" in browser.contents)
     
     def test_cvss_number_calculation(self):
-        # Put a definitely failing test here because we don't have any code for this at all yet
-        self.assertEquals([1,2], [1,2,3])
+
+        plonesite = self.layer["portal"]
+        
+        login(plonesite, TEST_USER_NAME)
+        setRoles(plonesite, TEST_USER_ID, ["Manager", "Member"])
+        transaction.commit()
+
+        # Allow vulnerabilities to be added to the site root
+        fti = plonesite.portal_types['vulnerability']
+        fti.global_allow = True
+        transaction.commit()
+
+        vulnerability = createContentInContainer(plonesite, 'vulnerability', title=u"Vulnerability 1")
+        transaction.commit()
+        view = getMultiAdapter((vulnerability, self.layer["request"]), name="view")
+
+        self.assertEqual(vulnerability.cvss_score, 0)
+        self.assertEqual(view.scariness, "low")
+
+        vulnerability.cvss_access_vector = "N"
+        vulnerability.cvss_access_complexity = "L"
+        vulnerability.cvss_authentication = "N"
+        vulnerability.cvss_confidentiality_impact = "N"
+        vulnerability.cvss_integrity_impact = "N"
+        vulnerability.cvss_availability_impact = "C"
     
-    
+        self.assertEqual(vulnerability.cvss_score, 7.8)
+        self.assertEqual(view.scariness, "high")
