@@ -58,3 +58,16 @@ table#hotfixes th {
     color: #FFF;
     padding:0.5em 1em !important;
 }
+
+table#hotfixes .non_supported_version {
+    display: none;
+}
+
+
+.show_unsupported_version {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+   margin: 10px;
+}

@@ -7,12 +7,24 @@
       i18n:domain="plone">
 <body>
 
+<metal:javascript fill-slot="javascript_head_slot">
+  <script>
+    jQuery(function($) {
+        $('.show_unsupported_version').click(function(){
+          $('.non_supported_version').show();
+        });
+    });
+  </script>
+</metal:javascript>
+
 <div metal:fill-slot="main">
   <div class="grid-row">
     <div class="grid-cell position-leftmost full-width">
 
       <h1>Plone versions - security support - maintenance - Hotfixes</h1>
 
+
+      <button class="show_unsupported_version">Show unsupported versions</button>
 
       <table id="hotfixes" class="listing">
         <thead>
@@ -23,7 +35,8 @@
           <th>Hotfix</th>
         </thead>
         <tal:versions repeat="version view/get_versions">
-          <tr tal:define="hotfixes python: view.get_hotfixes_for_version(version['name'])">
+          <tr class="" tal:define="hotfixes python: view.get_hotfixes_for_version(version['name'])"
+              tal:attributes="class python:'non_supported_version' if not version['security'] and not version['maintenance'] else 'supported_version'">
             <td tal:content="version/name"></td>
             <td tal:content="version/date"></td>
             <td tal:content="version/security" tal:attributes="class python: 'good' if version['security'] else 'bad'"></td>

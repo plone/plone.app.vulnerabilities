@@ -123,7 +123,11 @@
 
         <ul>
           <li tal:repeat="vulnerability view/get_vulnerabilities">
-            <a href="" tal:attributes="href vulnerability/getURL"><span tal:replace="vulnerability/Title">Vulnerability</span></a>
+            <a href="" 
+               tal:attributes="href vulnerability/getURL"
+               tal:define="vul_obj vulnerability/getObject">
+               <span tal:replace="vulnerability/Title">Vulnerability</span> - <span tal:replace="vul_obj/@@view/scariness">LOW</span>
+            </a>
 
           </li>
 
