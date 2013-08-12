@@ -22,5 +22,11 @@
            factory="plone.app.vulnerabilities.content.hotfix.NameFromReleaseDate"
            />
 
+  <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component="plone.app.vulnerabilities.versions.plone_version_vocabulary"
+        name="plone.app.vulnerabilities.ploneversions"
+   />
+
 
 </configure>
