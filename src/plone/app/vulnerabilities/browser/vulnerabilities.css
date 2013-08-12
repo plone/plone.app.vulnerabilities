@@ -54,6 +54,7 @@ table#hotfixes .bad {
 }
 
 table#hotfixes th {
-    background-color:#EEE;
+    background-color:#AAA;
+    color: #FFF;
     padding:0.5em 1em !important;
 }
