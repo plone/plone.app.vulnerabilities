@@ -29,4 +29,16 @@
    />
 
 
+   <permission
+     id="plone.app.vulnerabilities.hotfix.view_release"
+     title="Hotfix: View release"
+     />
+
+   <permission
+       id="plone.app.vulnerabilities.hotfix.view_preannounce"
+       title="Hotfix: View preannounce"
+    />
+
+
+
 </configure>
