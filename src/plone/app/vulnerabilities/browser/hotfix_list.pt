@@ -7,8 +7,12 @@
       i18n:domain="plone">
 <body>
 
-<metal:content-core fill-slot="content-core">
-    <metal:content-core define-macro="content-core">
+<div metal:fill-slot="main">
+  <div class="grid-row">
+    <div class="grid-cell position-two-thirds width-third">
+
+      <h1>Plone versions - security support - maintenance - Hotfixes</h1>
+
 
       <table id="hotfixes" class="listing">
         <thead>
@@ -32,9 +36,10 @@
           </tr>
         </tal:versions>
       </table>
-    </metal:content-core>
-</metal:content-core>
 
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
