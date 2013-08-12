@@ -143,6 +143,8 @@ class TestVulnerabilities(unittest.TestCase):
         self.assertEqual(vulnerability.cvss_score, 0)
         self.assertEqual(view.scariness, "low")
 
+        # Example 1: http://www.first.org/cvss/cvss-guide#i3.3.2
+
         vulnerability.cvss_access_vector = "N"
         vulnerability.cvss_access_complexity = "L"
         vulnerability.cvss_authentication = "N"
@@ -152,3 +154,27 @@ class TestVulnerabilities(unittest.TestCase):
     
         self.assertEqual(vulnerability.cvss_score, 7.8)
         self.assertEqual(view.scariness, "high")
+
+        # Example 2: http://www.first.org/cvss/cvss-guide#i3.3.3
+
+        vulnerability.cvss_access_vector = "N"
+        vulnerability.cvss_access_complexity = "L"
+        vulnerability.cvss_authentication = "N"
+        vulnerability.cvss_confidentiality_impact = "C"
+        vulnerability.cvss_integrity_impact = "C"
+        vulnerability.cvss_availability_impact = "C"
+    
+        self.assertEqual(vulnerability.cvss_score, 10.0)
+        self.assertEqual(view.scariness, "high")
+
+        # Example 3: http://www.first.org/cvss/cvss-guide#i3.3.4
+
+        vulnerability.cvss_access_vector = "L"
+        vulnerability.cvss_access_complexity = "H"
+        vulnerability.cvss_authentication = "N"
+        vulnerability.cvss_confidentiality_impact = "C"
+        vulnerability.cvss_integrity_impact = "C"
+        vulnerability.cvss_availability_impact = "C"
+    
+        self.assertEqual(vulnerability.cvss_score, 6.2)
+        self.assertEqual(view.scariness, "medium")

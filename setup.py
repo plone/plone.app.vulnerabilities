@@ -31,6 +31,7 @@ setup(name='plone.app.vulnerabilities',
           'setuptools',
           'Plone',
           'plone.app.dexterity',
+          'plone.directives.form'
       ],
       entry_points="""
       # -*- Entry points: -*-
