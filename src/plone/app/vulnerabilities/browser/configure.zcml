@@ -44,5 +44,12 @@
 		permission="zope2.View"
 		/>
 
+	<page 
+		name="view"
+		template="hotfix.pt"
+		class=".hotfixes.HotfixView"
+		for="plone.app.vulnerabilities.content.hotfix.IHotfix"
+		permission="zope2.View"
+		/>
 
 </configure>
