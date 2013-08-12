@@ -24,11 +24,12 @@ class HostfixListing(BrowserView):
 		maintenance = registry['plone.activemaintenance']
 		result = []
 		for v in sorted(versions, reverse=True):
+			version = v.split('-')[0]
 			data = {
-				'name': v,
-				'date': versions[v],
-				'security': v in security,
-				'maintenance': v in maintenance
+				'name': version,
+				'date': v.split('-')[1],
+				'security': version in security,
+				'maintenance': version in maintenance
 			   }
 			result.append(data)
 		return result
