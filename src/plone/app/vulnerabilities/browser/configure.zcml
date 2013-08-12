@@ -20,6 +20,15 @@
 		/>
 
 	<page 
+		name="hotfixes"
+		template="hotfix_list.pt"
+		class=".hotfixes.HostfixListing"
+		for="*"
+		permission="zope2.View"
+		/>
+
+
+	<page 
 		name="view"
 		template="vulnerability.pt"
 		class=".vulnerability.VulnerabilityView"
