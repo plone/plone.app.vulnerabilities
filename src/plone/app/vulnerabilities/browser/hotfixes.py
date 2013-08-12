@@ -18,21 +18,21 @@ class HostfixListing(BrowserView):
         the correct list to the client """
 
     def get_versions(self):
-		registry = getUtility(IRegistry)
-		versions = registry['plone.versions']
-		security = registry['plone.securitysupport']
-		maintenance = registry['plone.activemaintenance']
-		result = []
-		for v in sorted(versions, reverse=True):
-			version = v.split('-')[0]
-			data = {
-				'name': version,
-				'date': v.split('-')[1],
-				'security': version in security,
-				'maintenance': version in maintenance
-			   }
-			result.append(data)
-		return result
+        registry = getUtility(IRegistry)
+        versions = registry['plone.versions']
+        security = registry['plone.securitysupport']
+        maintenance = registry['plone.activemaintenance']
+        result = []
+        for v in sorted(versions, reverse=True):
+            version = v.split('-')[0]
+            data = {
+                'name': version,
+                'date': v.split('-')[1],
+                'security': version in security,
+                'maintenance': version in maintenance
+               }
+            result.append(data)
+        return result
 
     def get_hotfixes_for_version(self, version):
         # get all hotfixes
