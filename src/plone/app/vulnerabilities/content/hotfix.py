@@ -1,14 +1,14 @@
-from zope.interface import implements
+from zope.interface import Interface,implements
 from plone.dexterity.content import Container
 from zope import schema
 from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.textfield import RichText
-from plone.supermodel import model
+from plone.directives import form
 from plone.autoform.directives import read_permission
 
 from plone.app.vulnerabilities.field import ChecksummedFile
-class IHotfix(model.Schema):
+class IHotfix(Interface):
     """ Marker interface for Hotfixes """
 
     description = schema.Text(title=_(u"Summary"),
@@ -35,7 +35,7 @@ class IHotfix(model.Schema):
                     allowed_mime_types=("text/html",),
                     required=False)
 
-    model.fieldset(
+    form.fieldset(
             'preannounce',
             label=_(u"Preannounce"),
             fields=['preannounce_text']
