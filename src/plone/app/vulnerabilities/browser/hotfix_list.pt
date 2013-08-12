@@ -9,7 +9,7 @@
 
 <div metal:fill-slot="main">
   <div class="grid-row">
-    <div class="grid-cell position-two-thirds width-third">
+    <div class="grid-cell position-leftmost full-width">
 
       <h1>Plone versions - security support - maintenance - Hotfixes</h1>
 
