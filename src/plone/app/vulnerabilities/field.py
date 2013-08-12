@@ -6,8 +6,6 @@ from plone.namedfile.interfaces import INamedFile, INamedFileField
 from plone.namedfile.field import NamedFile
 from plone.namedfile.file import NamedFile as FileValueType
 
-# I have no idea what I am doing here.
-
 class IChecksummedFile(INamedFile):
     md5 = schema.TextLine(title=u"MD5", required=False, default=None)
     sha1 = schema.TextLine(title=u"SHA1", required=False, default=None)
