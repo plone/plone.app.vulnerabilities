@@ -14,6 +14,10 @@ class IHotfix(model.Schema):
     release_date = schema.Date(title=_(u"Release date"),
                                description=_(u"Date the hotfix will be released"))
 
+    # XXX: What about non-core packages?
+    affected_versions = schema.List(title=_(u"Affected Plone versions"),
+                                    value_type=schema.Choice(source="plone.app.vulnerabilities.ploneversions"))
+
     description = schema.Text(title=_(u"Summary"),
                               description=_(u"A summary of the hotfix contents, used in item listings and search results."),
                               default=u"")
