@@ -18,7 +18,6 @@ class IHotfix(Interface):
     release_date = schema.Date(title=_(u"Release date"),
                                description=_(u"Date the hotfix will be released"))
 
-    # XXX: What about non-core packages?
     read_permission(affected_versions='plone.app.vulnerabilities.hotfix.view_release')
     affected_versions = schema.List(title=_(u"Affected Plone versions"),
                                     value_type=schema.Choice(source="plone.app.vulnerabilities.ploneversions"))
@@ -60,10 +59,13 @@ class NameFromReleaseDate(object):
     def title(self):
         # Hotfixes have their ID generated from their release date.
         return self.context.release_date.strftime("%Y%m%d")
-    
+
+
 class Hotfix(Container):
     implements(IHotfix)
     
     def setTitle(self,title):
-        # Don't allow anything to change the title.
+        # Don't allow anything to change the title. While a little
+        # crude, this prevents the rename page from setting a title
+        # on a hotfix which it's not possible to remove
         return
