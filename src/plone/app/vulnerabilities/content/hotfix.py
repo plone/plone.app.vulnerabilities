@@ -7,6 +7,7 @@ from plone.namedfile.field import NamedFile
 from plone.app.textfield import RichText
 from plone.supermodel import model
 
+from plone.app.vulnerabilities.field import ChecksummedFile
 class IHotfix(model.Schema):
     """ Marker interface for Hotfixes """
 
@@ -17,7 +18,7 @@ class IHotfix(model.Schema):
                               description=_(u"A summary of the hotfix contents, used in item listings and search results."),
                               default=u"")
 
-    hotfix = NamedFile(title=_(u"Hotfix"),
+    hotfix = ChecksummedFile(title=_(u"Hotfix"),
                         description=_(u"Old-style product tarball for this hotfix"),
                         required=False)
     
