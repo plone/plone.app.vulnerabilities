@@ -11,6 +11,8 @@ def plone_version_vocabulary(context):
         terms.append(SimpleTerm(version,version,version))
     
     # XXX: Should probably include series (4.x, 4.2.x, 3.3.x etc)
+    # XXX: Should this only include versions in security support?
+    # XXX: Should this support 'less than' etc (<=4.2.1)
     
     result = SimpleVocabulary(terms)
     return result
