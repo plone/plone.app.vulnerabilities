@@ -1,26 +1,16 @@
-from zope.interface import Interface,implements
-from plone.dexterity.content import Container
-from zope import schema
-from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
 from Products.CMFCore.utils import getToolByName
 import pkg_resources
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.textfield import RichText
-from plone.directives import form
-from plone.autoform.directives import read_permission
-from plone.autoform.directives import read_permission
-from plone.dexterity.content import Container
-from plone.supermodel import model
-from zope import schema
-from zope.interface import implements
-
 from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
 from plone.app.vulnerabilities.content.vulnerability import IVulnerability
 from plone.app.vulnerabilities.field import ChecksummedFile
-from Products.CMFCore.utils import getToolByName
-
-
-class IHotfix(Interface):
+from plone.autoform.directives import read_permission
+from plone.dexterity.content import Container
+from plone.directives import form
+from plone.supermodel import model
+from zope import schema
+from zope.interface import implements
 
 
 class IHotfix(model.Schema):
