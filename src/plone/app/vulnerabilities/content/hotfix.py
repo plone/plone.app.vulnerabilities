@@ -1,17 +1,17 @@
-from zope.interface import implements
+from zope.interface import Interface,implements
 from plone.dexterity.content import Container
 from zope import schema
 from plone.app.vulnerabilities import VulnerabilitiesMessageFactory as _
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.textfield import RichText
-from plone.supermodel import model
+from plone.directives import form
 from plone.autoform.directives import read_permission
 
 from plone.app.vulnerabilities.field import ChecksummedFile
 from Products.CMFCore.utils import getToolByName
 
 
-class IHotfix(model.Schema):
+class IHotfix(Interface):
     """ Marker interface for Hotfixes """
 
     description = schema.Text(title=_(u"Summary"),
@@ -21,7 +21,6 @@ class IHotfix(model.Schema):
     release_date = schema.Date(title=_(u"Release date"),
                                description=_(u"Date the hotfix will be released"))
 
-    # XXX: What about non-core packages?
     read_permission(affected_versions='plone.app.vulnerabilities.hotfix.view_release')
     affected_versions = schema.List(title=_(u"Affected Plone versions"),
                                     value_type=schema.Choice(source="plone.app.vulnerabilities.ploneversions"))
@@ -38,7 +37,7 @@ class IHotfix(model.Schema):
                     allowed_mime_types=("text/html",),
                     required=False)
 
-    model.fieldset(
+    form.fieldset(
             'preannounce',
             label=_(u"Preannounce"),
             fields=['preannounce_text']
@@ -63,7 +62,8 @@ class NameFromReleaseDate(object):
     def title(self):
         # Hotfixes have their ID generated from their release date.
         return self.context.release_date.strftime("%Y%m%d")
-    
+
+
 class Hotfix(Container):
     implements(IHotfix)
     
@@ -74,5 +74,7 @@ class Hotfix(Container):
         return state
 
     def setTitle(self,title):
-        # Don't allow anything to change the title.
+        # Don't allow anything to change the title. While a little
+        # crude, this prevents the rename page from setting a title
+        # on a hotfix which it's not possible to remove
         return
