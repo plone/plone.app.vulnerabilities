@@ -9,17 +9,43 @@
 
 <metal:content-core fill-slot="content-core">
     <metal:content-core define-macro="content-core">
+      <style>
+        .good,.bad {
+            font-weight:bold;
+        }
+        
+        .good {
+            background-color:#DFF0D8 !important;
+        }
+        
+        .bad {
+            background-color:#F2DEDE !important;
+        }
+        
+        th {
+            background-color:#EEE;
+            padding:0.5em 1em !important;
+        }
+        
+                                
+      </style>
       <table class="listing">
         <thead>
           <th>Plone version</th>
+          <th>Release date</th>
+          <th>Security support</th>
+          <th>Active Maintenance</th>
           <th>Hotfix</th>
         </thead>
         <tal:versions repeat="version view/get_versions">
-          <tr tal:define="hotfixes python: view.get_hotfixes_for_version(version)">
-            <td tal:content="version"></td>
+          <tr tal:define="hotfixes python: view.get_hotfixes_for_version(version['name'])">
+            <td tal:content="version/name"></td>
+            <td tal:content="version/date"></td>
+            <td tal:content="version/security" tal:attributes="class python: 'good' if version['security'] else 'bad'"></td>
+            <td tal:content="version/maintenance"  tal:attributes="class python: 'good' if version['maintenance'] else 'bad'"></td>
             <td>
               <tal:hotfixes tal:repeat="hotfix hotfixes">
-                <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a><br/>
+                <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a> <br/>
               </tal:hotfixes>
             </td>
           </tr>

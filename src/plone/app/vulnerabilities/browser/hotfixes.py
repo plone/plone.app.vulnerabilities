@@ -20,7 +20,18 @@ class HostfixListing(BrowserView):
     def get_versions(self):
 		registry = getUtility(IRegistry)
 		versions = registry['plone.versions']
-		return versions
+		security = registry['plone.securitysupport']
+		maintenance = registry['plone.activemaintenance']
+		result = []
+		for v in sorted(versions, reverse=True):
+			data = {
+				'name': v,
+				'date': versions[v],
+				'security': v in security,
+				'maintenance': v in maintenance
+			   }
+			result.append(data)
+		return result
 
     def get_hotfixes_for_version(self, version):
 		# get all hotfixes
