@@ -35,18 +35,18 @@ class HostfixListing(BrowserView):
 		return result
 
     def get_hotfixes_for_version(self, version):
-		# get all hotfixes
-		result = []
-		context = aq_inner(self.context)
-		tools = getMultiAdapter((context, self.request), name=u'plone_tools')
+        # get all hotfixes
+        result = []
+        context = aq_inner(self.context)
+        tools = getMultiAdapter((context, self.request), name=u'plone_tools')
 
-		portal_catalog = tools.catalog()
-		brains = portal_catalog(object_provides=IHotfix.__identifier__)
+        portal_catalog = tools.catalog()
+        brains = portal_catalog(object_provides=IHotfix.__identifier__)
 
-		for brain in brains:
-			if version in brain.getObject().affected_versions:
-				result.append(brain)
+        for brain in brains:
+            if version in brain.getObject().affected_versions:
+                result.append(brain)
 
-		return result
+        return result
 
 
