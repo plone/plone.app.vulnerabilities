@@ -8,6 +8,9 @@ from plone.supermodel import model
 from plone.autoform.directives import read_permission
 
 from plone.app.vulnerabilities.field import ChecksummedFile
+from Products.CMFCore.utils import getToolByName
+
+
 class IHotfix(model.Schema):
     """ Marker interface for Hotfixes """
 
@@ -64,6 +67,12 @@ class NameFromReleaseDate(object):
 class Hotfix(Container):
     implements(IHotfix)
     
+    def released(self):
+        workflowTool = getToolByName(self, "portal_workflow")
+        status = workflowTool.getStatusOf("hotfix_workflow", self)
+        state = status["review_state"]
+        return state
+
     def setTitle(self,title):
         # Don't allow anything to change the title.
         return

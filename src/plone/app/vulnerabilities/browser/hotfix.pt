@@ -9,9 +9,119 @@
 
 <metal:content-core fill-slot="content-core">
     <metal:content-core define-macro="content-core">
-        <metal:field use-macro="python:context.widget('text', mode='view')">
-            Body text
-        </metal:field>
+
+      <tal:preannounce condition="python:context.released() == 'draft'">
+
+        <h1> Preannounce </h1>
+        
+          <tal:block condition="context/preannounce_text">
+            <div class="preannounce_text" tal:content="structure context/preannounce_text/output">
+            </div>
+          </tal:block>
+
+        <h1> Announce </h1>
+
+        <h2>Available downloads</h2>
+
+        <div tal:condition="context/hotfix">
+          <a class="link-plain" href="" tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
+            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 0 0.5em 0.5em 0;">
+          </a>
+  
+          <a class="link-plain" href="" 
+            tal:content="python:context.hotfix.filename"
+            tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
+            Filename
+          </a>
+
+    
+          <p class="discreet">
+            <span>MD5: </span> <span tal:replace="context/hotfix/md5"></span><br/>
+            <span>SHA1: </span> <span tal:replace="context/hotfix/sha1"></span><br/>
+            <span>For</span>
+            all platforms
+            
+                 (<span tal:replace="python:context.hotfix.getSize()" ></span> bytes)
+            
+            
+          </p>
+
+        </div>
+
+        <h2>Plone affected versions</h2>
+
+        <ul>
+          <tal:versio repeat="versio context/affected_versions">
+            <li tal:content="versio"></li>
+          </tal:versio>
+        </ul>
+
+        <h2>Release Notes</h2>
+
+        <tal:block condition="context/text">
+
+        <div class="announce_text" tal:content="structure context/text/output">
+        </div>
+        </tal:block>
+      </tal:preannounce>
+
+
+      <tal:preannounce condition="python:context.released() == 'announced'">
+
+          <tal:block condition="context/preannounce_text">
+            <div class="preannounce_text" tal:content="structure context/preannounce_text/output">
+            </div>
+          </tal:block>
+
+      </tal:preannounce>
+
+      <tal:announce condition="python:context.released() == 'published'">
+
+        <h2>Available downloads</h2>
+
+        <div tal:condition="context/hotfix">
+          <a class="link-plain" href="" tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
+            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 0 0.5em 0.5em 0;"></a>
+  
+          <a class="link-plain" href="" 
+            tal:content="python:context.hotfix.filename"
+            tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
+            Filename
+          </a>
+
+    
+          <p class="discreet">
+            <span>MD5: </span> <span tal:replace="context/hotfix/md5"></span><br/>
+            <span>SHA1: </span> <span tal:replace="context/hotfix/sha1"></span><br/>
+            <span>For</span>
+            all platforms
+            
+                 (<span tal:replace="python:context.hotfix.getSize()" ></span> bytes)
+            
+            
+          </p>
+
+        </div>
+
+        <h2>Plone affected versions</h2>
+
+        <ul>
+          <tal:versio repeat="versio context/affected_versions">
+            <li tal:content="versio"></li>
+          </tal:versio>
+        </ul>
+
+        <h2>Release Notes</h2>
+
+        <tal:block condition="context/text">
+
+          <div class="announce_text" tal:content="structure context/text/output">
+          </div>
+        </tal:block>
+
+
+      </tal:announce>
+
     </metal:content-core>
 </metal:content-core>
 
