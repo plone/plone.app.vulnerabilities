@@ -7,6 +7,8 @@
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
+ <permission>Hotfix: View preannounce</permission>
+ <permission>Hotfix: View release</permission>
  <state state_id="announced" title="Hotfix Pre-Announcement">
   <exit-transition transition_id="publish"/>
   <exit-transition transition_id="retract"/>
@@ -20,6 +22,9 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
+   <permission-role>Anonymous</permission-role>
+  </permission-map>
+  <permission-map name="Hotfix: View preannounce" acquired="False">
    <permission-role>Anonymous</permission-role>
   </permission-map>
  </state>
@@ -52,6 +57,10 @@
   <permission-map name="View" acquired="False">
    <permission-role>Anonymous</permission-role>
   </permission-map>
+  <permission-map name="Hotfix: View release" acquired="False">
+   <permission-role>Anonymous</permission-role>
+  </permission-map>
+  
  </state>
  <transition transition_id="preannounce" title="Release a preannouncement of a Hotfix" new_state="announced" trigger="USER" before_script="" after_script="">
   <description>Release a preannouncement of a Hotfix</description>
