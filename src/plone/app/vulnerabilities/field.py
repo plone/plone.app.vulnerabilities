@@ -26,8 +26,8 @@ class ChecksummedFileValueType(FileValueType):
     def _setData(self,data):
         super(ChecksummedFileValueType,self)._setData(data)
         body = self._getData()
-        self.md5 = unicode(sha1(body).hexdigest())
-        self.sha1 = unicode(md5(body).hexdigest())
+        self.sha1 = unicode(sha1(body).hexdigest())
+        self.md5 = unicode(md5(body).hexdigest())
 
     data = property(FileValueType._getData, _setData)
 
