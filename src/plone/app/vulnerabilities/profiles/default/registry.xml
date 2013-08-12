@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<registry>
+ 	<record name="plone.versions">
+	    <field type="plone.registry.field.Tuple">
+	        <title>Plone Versions</title>
+	        <description>A list of plone versions</description>
+	        <value_type type="plone.registry.field.TextLine" />
+	    </field>
+	    <value>
+	        <element>4.3</element>
+	        <element>4.2</element>
+	        <element>4.1</element>
+	    </value>
+	</record>
+</registry>

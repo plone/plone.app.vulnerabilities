@@ -10,3 +10,5 @@ parts/
 src/Zope2.egg-info/
 
 /var/
+
+*.egg-info
