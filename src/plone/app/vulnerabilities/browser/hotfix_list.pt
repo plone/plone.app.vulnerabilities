@@ -5,7 +5,7 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
-<body>
+<body define="global sr python:True;">
 
 <metal:javascript fill-slot="javascript_head_slot">
   <script>
@@ -17,9 +17,11 @@
   </script>
 </metal:javascript>
 
-<div metal:fill-slot="main">
-  <div class="grid-row">
-    <div class="grid-cell position-leftmost full-width">
+<metal:override fill-slot="top_slot"
+    tal:define="disable_column_two python:request.set('disable_plone.rightcolumn',0);"/>
+
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
 
       <h1>Plone versions - security support - maintenance - Hotfixes</h1>
 
@@ -49,10 +51,23 @@
           </tr>
         </tal:versions>
       </table>
+  </metal:content-core>
+</metal:content-core>
 
-    </div>
+<metal:column-two fill-slot="portlets_two_slot">
+  <div class="portletWrapper">
+    <dl class="portlet">
+    <dt class="portletHeader">
+            <span>Hotfixes</span>
+    </dt>
+    <dd  tal:repeat="hotfix view/get_hotfixes" class="portletItem">
+      <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a>
+    </dd>
+    </dl>
   </div>
-</div>
+</metal:column-two>
+
+
 </body>
 </html>
 

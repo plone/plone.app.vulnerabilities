@@ -5,7 +5,10 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
-<body>
+<body define="global sr python:True;">
+
+<metal:override fill-slot="top_slot"
+    tal:define="disable_column_two python:request.set('disable_plone.rightcolumn',0);"/>
 
 <metal:content-core fill-slot="content-core">
     <metal:content-core define-macro="content-core">
@@ -25,7 +28,7 @@
 
         <div tal:condition="context/hotfix">
           <a class="link-plain" href="" tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
-            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 0 0.5em 0.5em 0;">
+            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 1em 1em 1em 1em;">
           </a>
   
           <a class="link-plain" href="" 
@@ -81,7 +84,7 @@
 
         <div tal:condition="context/hotfix">
           <a class="link-plain" href="" tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
-            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 0 0.5em 0.5em 0;"></a>
+            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 1em 1em 1em 1em;"></a>
   
           <a class="link-plain" href="" 
             tal:content="python:context.hotfix.filename"
@@ -138,6 +141,25 @@
 
     </metal:content-core>
 </metal:content-core>
+
+
+<metal:column-two fill-slot="portlets_two_slot">
+  <div class="portletWrapper">
+    <dl class="portlet">
+    <dt class="portletHeader">
+            <span>Vulnerabilities</span>
+    </dt>
+          <dd tal:repeat="vulnerability view/get_vulnerabilities" class="portletItem">
+            <a href="" 
+               tal:attributes="href vulnerability/getURL"
+               tal:define="vul_obj vulnerability/getObject">
+               <span tal:replace="vulnerability/Title">Vulnerability</span> - <span tal:replace="vul_obj/@@view/scariness">LOW</span>
+            </a>
+
+          </dd>
+    </dl>
+  </div>
+</metal:column-two>
 
 </body>
 </html>
