@@ -20,8 +20,8 @@
 <metal:override fill-slot="top_slot"
     tal:define="disable_column_two python:request.set('disable_plone.rightcolumn',0);"/>
 
-<metal:content-core fill-slot="content-core">
-    <metal:content-core define-macro="content-core">
+<metal:content-core fill-slot="main">
+    <metal:content-core define-macro="main">
 
       <h1>Plone versions - security support - maintenance - Hotfixes</h1>
 
