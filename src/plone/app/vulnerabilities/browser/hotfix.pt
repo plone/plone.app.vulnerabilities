@@ -122,7 +122,7 @@
           </div>
         </tal:block>
 
-        <h2>Vulnerabilties</h2>
+        <h2>Issues fixed</h2>
 
         <ul>
           <li tal:repeat="vulnerability view/get_vulnerabilities">
@@ -147,7 +147,7 @@
   <div class="portletWrapper">
     <dl class="portlet">
     <dt class="portletHeader">
-            <span>Vulnerabilities</span>
+            <span>Issues fixed</span>
     </dt>
           <dd tal:repeat="vulnerability view/get_vulnerabilities" class="portletItem">
             <a href="" 

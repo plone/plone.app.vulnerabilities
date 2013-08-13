@@ -41,8 +41,8 @@
               tal:attributes="class python:'non_supported_version' if not version['security'] and not version['maintenance'] else 'supported_version'">
             <td tal:content="version/name"></td>
             <td tal:content="version/date"></td>
-            <td tal:content="version/security" tal:attributes="class python: 'good' if version['security'] else 'bad'"></td>
-            <td tal:content="version/maintenance"  tal:attributes="class python: 'good' if version['maintenance'] else 'bad'"></td>
+            <td tal:content="python: 'Yes' if version['security'] else 'No'" tal:attributes="class python: 'good' if version['security'] else 'bad'"></td>
+            <td tal:content="python: 'Yes' if version['maintenance'] else 'No'"  tal:attributes="class python: 'good' if version['maintenance'] else 'bad'"></td>
             <td>
               <tal:hotfixes tal:repeat="hotfix hotfixes">
                 <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a> <br/>
