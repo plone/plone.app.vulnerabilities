@@ -24,7 +24,7 @@ class HostfixListing(BrowserView):
         portal_catalog = tools.catalog()
         brains = portal_catalog(object_provides=IHotfix.__identifier__)
 
-        return sorted(result, key=lambda hotfix: hotfix.id, reverse=True)
+        return sorted(brains, key=lambda hotfix: hotfix.id, reverse=True)
 
 
     def get_versions(self):
