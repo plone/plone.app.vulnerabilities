@@ -28,6 +28,13 @@
 		/>
 
 	<page 
+		name="hotfix_json"
+		class=".hotfixes.HostfixJSONListing"
+		for="*"
+		permission="zope2.View"
+		/>
+
+	<page 
 		name="view"
 		template="hotfix.pt"
 		class=".hotfix.HotfixView"

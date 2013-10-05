@@ -5,6 +5,8 @@ from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 from plone.app.vulnerabilities.content.hotfix import IHotfix
 
+import json
+
 
 class HotfixFeed(BrowserView):
     """ Load the collection of hotfixes and perform any processing required to present 
@@ -59,3 +61,49 @@ class HostfixListing(BrowserView):
 
         return sorted(result, key=lambda hotfix: hotfix.id, reverse=True)
 
+class HostfixJSONListing(HostfixListing):
+
+    def __init__(self, context, request):
+        #super(HostfixJSONListing, self).__init__()
+        self.context = context
+        self.request = request
+
+    def __call__(self): 
+        registry = getUtility(IRegistry)
+        versions = registry['plone.versions']
+        security = registry['plone.securitysupport']
+        maintenance = registry['plone.activemaintenance']
+        result = []
+
+        for v in sorted(versions, reverse=True):
+            version = v.split('-')[0]
+            vdata = {
+                'name': version,
+                'date': v.split('-')[1],
+                'security': version in security,
+                'maintenance': version in maintenance,
+                'hotfixes' : { 
+
+                }
+            }
+            applied_hotfixes = []
+            fixs = self.get_hotfixes_for_version(version)
+            for f in fixs:
+                fix = f.getObject()
+                fix_data = {
+                    'name' : fix.id ,
+                    'url'  : fix.absolute_url(),
+                }
+                applied_hotfixes.append(fix_data)
+            vdata['hotfixes'] = applied_hotfixes
+            result.append(vdata)
+
+
+        if self.request.form.has_key('version'):
+            requested_version = self.request.form['version']    
+            for r in result:
+                if r['name'] == requested_version:
+                    data = r
+            return data
+
+        return json.dumps(result);
