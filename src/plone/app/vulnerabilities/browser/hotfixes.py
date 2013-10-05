@@ -62,9 +62,12 @@ class HostfixListing(BrowserView):
         return sorted(result, key=lambda hotfix: hotfix.id, reverse=True)
 
 class HostfixJSONListing(HostfixListing):
+    """ Load the collection of hotfixes and perform any processing required to present 
+        the correct list to the client via json
+    """
 
     def __init__(self, context, request):
-        #super(HostfixJSONListing, self).__init__()
+        super(HostfixJSONListing, self).__init__(context, request)
         self.context = context
         self.request = request
 
