@@ -89,6 +89,7 @@ class HostfixJSONListing(HostfixListing):
 
                 }
             }
+
             applied_hotfixes = []
             fixs = self.get_hotfixes_for_version(version)
             for f in fixs:
@@ -101,12 +102,11 @@ class HostfixJSONListing(HostfixListing):
             vdata['hotfixes'] = applied_hotfixes
             result.append(vdata)
 
-
         if self.request.form.has_key('version'):
             requested_version = self.request.form['version']    
             for r in result:
                 if r['name'] == requested_version:
-                    data = r
-            return data
+                    return json.dumps(r)
+            return json.dumps(None)
 
-        return json.dumps(result);
+        return json.dumps(result)
