@@ -63,6 +63,19 @@ table#hotfixes .non_supported_version {
     display: none;
 }
 
+ul#version-support li
+{
+    display: block;
+    width: 75px;
+    height: 50px;
+    float: left;
+    font-family: monospace;
+}
+
+ul#version-support+h2
+{
+    clear: left;
+}
 
 .show_unsupported_version {
     padding-left: 15px;

@@ -53,7 +53,7 @@
 
         <h2>Plone affected versions</h2>
 
-        <ul>
+        <ul id="version-support">
           <tal:versio repeat="versio context/getAffectedVersions">
             <li tal:content="versio"></li>
           </tal:versio>
