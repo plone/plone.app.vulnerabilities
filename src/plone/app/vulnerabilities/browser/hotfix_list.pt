@@ -11,7 +11,7 @@
   <script>
     jQuery(function($) {
         $('.show_unsupported_version').click(function(){
-          $('.non_supported_version').show();
+          $('.non_supported_version').toggle();
         });
     });
   </script>
