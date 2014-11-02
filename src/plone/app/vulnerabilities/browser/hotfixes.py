@@ -111,6 +111,7 @@ class HostfixJSONListing(HostfixListing):
                         '/@@download/hotfix'
                     fix_data['md5'] = fix.hotfix.md5
                     fix_data['sha1'] = fix.hotfix.sha1
+                    fix_data['pypi_name'] = 'Products.PloneHotfix' + fix.id
 
                 applied_hotfixes.append(fix_data)
             vdata['hotfixes'] = applied_hotfixes
