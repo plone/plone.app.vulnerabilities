@@ -104,11 +104,16 @@ class HostfixJSONListing(HostfixListing):
             vdata['hotfixes'] = applied_hotfixes
             result.append(vdata)
 
+        self.request.RESPONSE.setHeader('Content-Type', 'application/json')
+
         if 'version' in self.request.form:
             requested_version = self.request.form['version']
             for r in result:
                 if r['name'] == requested_version:
-                    return json.dumps(r)
-            return json.dumps(None)
+                    result = r
+                    break
+            else:
+                result = None
 
-        return json.dumps(result)
+        self.request.response.setBody(json.dumps(result))
+        return self.request.response
