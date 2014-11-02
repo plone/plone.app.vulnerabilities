@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from Products.Five.browser import BrowserView
+from datetime import datetime
 from plone.app.vulnerabilities.content.hotfix import IHotfix
 from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
@@ -82,9 +83,13 @@ class HostfixJSONListing(HostfixListing):
 
         for v in sorted(versions, reverse=True):
             version = v.split('-')[0]
+            date_format = '%b %d, %Y'
+            plone_version_release_date = datetime.strptime(
+                v.split('-')[1], date_format).date()
+
             vdata = {
                 'name': version,
-                'date': v.split('-')[1],
+                'date': plone_version_release_date.isoformat(),
                 'security': version in security,
                 'maintenance': version in maintenance,
                 'hotfixes': {
@@ -99,12 +104,20 @@ class HostfixJSONListing(HostfixListing):
                 fix_data = {
                     'name': fix.id,
                     'url': fix.absolute_url(),
+                    'release_date': fix.release_date.isoformat(),
                 }
+                if fix.hotfix is not None:
+                    fix_data['download_url'] = fix.absolute_url() + \
+                        '/@@download/hotfix'
+                    fix_data['md5'] = fix.hotfix.md5
+                    fix_data['sha1'] = fix.hotfix.sha1
+
                 applied_hotfixes.append(fix_data)
             vdata['hotfixes'] = applied_hotfixes
             result.append(vdata)
 
-        self.request.RESPONSE.setHeader('Content-Type', 'application/json')
+        self.request.RESPONSE.setHeader('Content-Type',
+                                        'application/json; charset="UTF-8"')
 
         if 'version' in self.request.form:
             requested_version = self.request.form['version']
