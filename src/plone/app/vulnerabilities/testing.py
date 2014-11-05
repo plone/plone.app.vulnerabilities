@@ -6,19 +6,20 @@ from plone.app.testing import applyProfile
 from plone.testing import z2
 from zope.configuration import xmlconfig
 
+
 class VulnerabilitiesTests(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE,z2.ZSERVER_FIXTURE)
-    
+    defaultBases = (PLONE_FIXTURE, z2.ZSERVER_FIXTURE)
+
     def setUpZope(self, app, configurationContext):
         # Load ZCML
         import plone.app.vulnerabilities
         xmlconfig.file('configure.zcml', plone.app.vulnerabilities, context=configurationContext)
         z2.installProduct(app, 'plone.app.vulnerabilities')
-    
+
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'plone.app.vulnerabilities:default')
-    
+
 
 VULN_POLICY_FIXTURE = VulnerabilitiesTests()
 

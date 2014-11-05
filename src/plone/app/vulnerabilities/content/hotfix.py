@@ -27,7 +27,7 @@ class IHotfix(model.Schema):
     hotfix = ChecksummedFile(title=_(u"Hotfix"),
                         description=_(u"Old-style product tarball for this hotfix"),
                         required=False)
-    
+
     read_permission(text='plone.app.vulnerabilities.hotfix.view_release')
     text = RichText(title=_(u"Release body"),
                     description=_(u"This will be shown after the hotfix is released"),
@@ -52,7 +52,7 @@ class IHotfix(model.Schema):
 
 class NameFromReleaseDate(object):
     implements(INameFromTitle)
-    
+
     def __init__(self, context):
         self.context = context
 
@@ -62,16 +62,17 @@ class NameFromReleaseDate(object):
         return self.context.release_date.strftime("%Y%m%d")
 
 
+
 class Hotfix(Container):
     implements(IHotfix)
-    
+
     def released(self):
         workflowTool = getToolByName(self, "portal_workflow")
         status = workflowTool.getStatusOf("hotfix_workflow", self)
         state = status["review_state"]
         return state
 
-    def setTitle(self,title):
+    def setTitle(self, title):
         # Don't allow anything to change the title. While a little
         # crude, this prevents the rename page from setting a title
         # on a hotfix which it's not possible to remove
