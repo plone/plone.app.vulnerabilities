@@ -7,13 +7,8 @@
 	        <value_type type="plone.registry.field.TextLine" />
 	    </field>
 	    <value>
-          <element>4.3.4-Nov 22, 2014</element>
-          <element>4.3.3-Apr 28, 2014</element>
-          <element>4.3.2-Dec 23, 2013</element>
 	        <element>4.3.1-Jun 25, 2013</element>
 	        <element>4.3-Apr 15, 2013</element>
-          <element>4.2.7-Dec 10, 2013</element>
-          <element>4.2.6-Sep 12, 2013</element>
 	        <element>4.2.5-Mar 20, 2013</element>
 	        <element>4.2.4-Jan 27, 2013</element>
 	        <element>4.2.3-Jan 08, 2013</element>
@@ -50,9 +45,9 @@
 	        <value_type type="plone.registry.field.TextLine" />
 	    </field>
 	    <value>
-	        <element>4.3.4</element>
+	        <element>4.3.1</element>
 	        <element>4.3</element>
-	        <element>4.2.7</element>
+	        <element>4.2.5</element>
 	        <element>4.1.6</element>
 	        <element>4.0.9</element>
 	        <element>3.3.6</element>
@@ -65,9 +60,6 @@
 	        <value_type type="plone.registry.field.TextLine" />
 	    </field>
 	    <value>
-          <element>4.3.4</element>
-          <element>4.3.3</element>
-          <element>4.3.2</element>
 	        <element>4.3.1</element>
 	        <element>4.3</element>
 	    </value>
