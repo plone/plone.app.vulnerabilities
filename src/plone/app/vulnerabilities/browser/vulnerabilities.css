@@ -1,4 +1,4 @@
-table#vulninfo { 
+table#vulninfo {
     width: 100%;
     padding: .5em 0;
 }
@@ -78,9 +78,5 @@ ul#version-support+h2
 }
 
 .show_unsupported_version {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 7px;
-    padding-bottom: 7px;
    margin: 10px;
 }
