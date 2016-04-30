@@ -2,7 +2,7 @@
 	xmlns="http://namespaces.zope.org/browser"
     xmlns:browser="http://namespaces.zope.org/browser"
 	xmlns:zope="http://namespaces.zope.org/zope"
-	xmlns:zcml="http://namespaces.zope.org/zcml"	
+	xmlns:zcml="http://namespaces.zope.org/zcml"
 	>
 
     <browser:resource
@@ -10,8 +10,14 @@
 	    permission="zope2.View"
 	    file="vulnerabilities.css"
 	    />
-		
-	<page 
+
+		<browser:resource
+	    name="plone.app.vulnerabilities.vulnerabilities.js"
+	    permission="zope2.View"
+	    file="vulnerabilities.js"
+	    />
+
+	<page
 		name="hotfix_feed"
 		template="hotfix_feed.pt"
 		class=".hotfixes.HotfixFeed"
@@ -19,7 +25,7 @@
 		permission="zope2.View"
 		/>
 
-	<page 
+	<page
 		name="hotfixes"
 		template="hotfix_list.pt"
 		class=".hotfixes.HostfixListing"
@@ -27,14 +33,14 @@
 		permission="zope2.View"
 		/>
 
-	<page 
+	<page
 		name="hotfix_json"
 		class=".hotfixes.HostfixJSONListing"
 		for="*"
 		permission="zope2.View"
 		/>
 
-	<page 
+	<page
 		name="view"
 		template="hotfix.pt"
 		class=".hotfix.HotfixView"
@@ -43,7 +49,7 @@
 		/>
 
 
-	<page 
+	<page
 		name="view"
 		template="vulnerability.pt"
 		class=".vulnerability.VulnerabilityView"

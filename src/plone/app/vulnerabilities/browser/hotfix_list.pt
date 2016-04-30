@@ -56,18 +56,22 @@
 
 <metal:column-two fill-slot="portlets_two_slot">
   <div class="portletWrapper">
-    <dl class="portlet">
-    <dt class="portletHeader">
-            <span>Hotfixes</span>
-    </dt>
-    <dd  tal:repeat="hotfix view/get_hotfixes" class="portletItem">
-      <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a>
-    </dd>
-    </dl>
+    <section class="portlet portletCollection portlet-collection-news-archives">
+      <header class="portletHeader">
+        <span>Hotfixes</span>
+      </header>
+      <ul class="portletContent">
+        <li class="portletItem"
+            tal:repeat="hotfix view/get_hotfixes">
+          <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a>
+        </li>
+      </ul>
+      <footer class="portletFooter">
+      </footer>
+    </section>
   </div>
 </metal:column-two>
 
 
 </body>
 </html>
-
