@@ -26,7 +26,7 @@
       <h1>Plone versions - security support - maintenance - Hotfixes</h1>
 
 
-      <button class="show_unsupported_version">Show unsupported versions</button>
+      <button class="btn btn-prime">Show unsupported versions</button>
 
       <table id="hotfixes" class="listing">
         <thead>
