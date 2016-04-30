@@ -6,7 +6,7 @@
       <description>A list of plone versions</description>
       <value_type type="plone.registry.field.TextLine" />
     </field>
-    <value>
+    <value purge="false">
       <element>4.3.4-Nov 22, 2014</element>
       <element>4.3.3-Apr 28, 2014</element>
       <element>4.3.2-Dec 23, 2013</element>
@@ -48,7 +48,7 @@
       <description>A list of plone versions with security support</description>
       <value_type type="plone.registry.field.TextLine" />
     </field>
-    <value>
+    <value purge="false">
       <element>4.3.4</element>
       <element>4.3</element>
       <element>4.2.7</element>
@@ -63,7 +63,7 @@
       <description>A list of plone versions with active maintenance support</description>
       <value_type type="plone.registry.field.TextLine" />
     </field>
-    <value>
+    <value purge="false">
       <element>4.3.4</element>
       <element>4.3.3</element>
       <element>4.3.2</element>
