@@ -8,8 +8,8 @@
   <include package="Products.CMFCore" />
   <include package="plone.app.dexterity" />
   <include package="plone.directives.form" file="meta.zcml" />
-  <include package="plone.directives.form" />   
-  
+  <include package="plone.directives.form" />
+
   <include package=".browser" />
 
   <gs:registerProfile
@@ -21,6 +21,7 @@
       />
 
   <adapter for="plone.app.vulnerabilities.content.hotfix.IHotfix"
+           provides="plone.app.vulnerabilities.content.hotfix.INameFromReleaseDate"
            factory="plone.app.vulnerabilities.content.hotfix.NameFromReleaseDate"
            />
 

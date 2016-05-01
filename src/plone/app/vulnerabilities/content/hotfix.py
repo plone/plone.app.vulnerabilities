@@ -25,8 +25,8 @@ class IHotfix(model.Schema):
 
     read_permission(hotfix='plone.app.vulnerabilities.hotfix.view_release')
     hotfix = ChecksummedFile(title=_(u"Hotfix"),
-                        description=_(u"Old-style product tarball for this hotfix"),
-                        required=False)
+                             description=_(u"Old-style product tarball for this hotfix"),
+                             required=False)
 
     read_permission(text='plone.app.vulnerabilities.hotfix.view_release')
     text = RichText(title=_(u"Release body"),
@@ -36,10 +36,10 @@ class IHotfix(model.Schema):
                     required=False)
 
     form.fieldset(
-            'preannounce',
-            label=_(u"Preannounce"),
-            fields=['preannounce_text']
-        )
+        'preannounce',
+        label=_(u"Preannounce"),
+        fields=['preannounce_text']
+    )
 
     read_permission(preannounce_text='plone.app.vulnerabilities.hotfix.view_preannounce')
     preannounce_text = RichText(title=_(u"Preannounce body"),
@@ -49,9 +49,13 @@ class IHotfix(model.Schema):
                                 required=False)
 
 
+class INameFromReleaseDate(INameFromTitle):
+    def title():
+        """Return a processed title"""
+
 
 class NameFromReleaseDate(object):
-    implements(INameFromTitle)
+    implements(INameFromReleaseDate)
 
     def __init__(self, context):
         self.context = context
@@ -62,9 +66,13 @@ class NameFromReleaseDate(object):
         return self.context.release_date.strftime("%Y%m%d")
 
 
-
 class Hotfix(Container):
     implements(IHotfix)
+
+    @property
+    def title(self):
+        # Hotfixes have their ID generated from their release date.
+        return self.context.release_date.strftime("%Y%m%d")
 
     def released(self):
         workflowTool = getToolByName(self, "portal_workflow")
