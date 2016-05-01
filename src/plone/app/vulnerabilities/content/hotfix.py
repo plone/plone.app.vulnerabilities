@@ -72,7 +72,7 @@ class Hotfix(Container):
     @property
     def title(self):
         # Hotfixes have their ID generated from their release date.
-        return self.context.release_date.strftime("%Y%m%d")
+        return self.release_date.strftime("%Y%m%d")
 
     def released(self):
         workflowTool = getToolByName(self, "portal_workflow")
