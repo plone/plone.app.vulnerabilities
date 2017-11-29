@@ -28,7 +28,7 @@
 
         <div tal:condition="context/hotfix">
           <a class="link-plain" href="" tal:attributes="href string:${context/absolute_url}/@@download/hotfix">
-            <img src="http://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 1em 1em 1em 1em;">
+            <img src="https://plone.org/platform_all_platforms.gif" alt="" style="float: left; display: block; margin: 1em 1em 1em 1em;">
           </a>
   
           <a class="link-plain" href="" 
