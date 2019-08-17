@@ -31,7 +31,6 @@ setup(name='plone.app.vulnerabilities',
           'setuptools',
           'Plone',
           'plone.app.dexterity',
-          'plone.directives.form',
           'plone.app.textfield',
           'plone.namedfile',
           'plone.autoform'
