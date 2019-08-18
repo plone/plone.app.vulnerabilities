@@ -7,7 +7,7 @@ from plone.app.vulnerabilities.content.vulnerability import IVulnerability
 from plone.app.vulnerabilities.field import ChecksummedFile
 from plone.autoform.directives import read_permission
 from plone.dexterity.content import Container
-from plone.supermodel.directives import fieldset
+from plone.directives import form
 from plone.supermodel import model
 from zope import schema
 from zope.interface import implements
@@ -35,7 +35,7 @@ class IHotfix(model.Schema):
                     allowed_mime_types=("text/html",),
                     required=False)
 
-    fieldset(
+    form.fieldset(
         'preannounce',
         label=_(u"Preannounce"),
         fields=['preannounce_text']
