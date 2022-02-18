@@ -100,7 +100,10 @@ class Hotfix(Container):
 
         result = []
         for brain in brains:
-            result.extend(brain.getObject().affected_versions)
+            obj = brain.getObject()
+            affected_versions = getattr(obj.aq_base, "affected_versions", [])
+            if affected_versions:
+                result.extend(affected_versions)
 
         result = sorted(set(result), key=pkg_resources.parse_version)
         result.reverse()
