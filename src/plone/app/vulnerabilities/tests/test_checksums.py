@@ -1,16 +1,16 @@
-import unittest2 as unittest
+import unittest
 
 from plone.app.vulnerabilities.field import ChecksummedFileValueType, IChecksummedFile
 
 DUMMY_FILE = "g0gxGHcJBjFkr2lo0AurXBZV0esJNMTTyaeb4PCXCZv0WwSTcWZ8XMKJvSb9gJE8ygsRWvwJeC0s2WAUVIdXVfGylSegEGQ52L5dXH0OYeFoggh7Dy9KGWaplqMnvxaMdsb4z3EIMI5HhxtRjTbD7zLzttgvmfvTjY5k49Qmh0s0mqdvBG5ENL3rMYBB1haMPIrF6RF3aXl7DddNakR1BFcVfKkfWJCdQLnla4a9oSSLNObboHqXpiPNxNwNIFEoRETMeH4o8oCPJjRMvzhf1tQpQl0v08zF4KyjGZPs7n76Hhs8qjv1i8YzHH9iBhWeqQh585cXqFBvlnbXTWWLMESerV9QWXoDggJA3CeQOPQHh4hPKiwGJeN7mTV6DMozVKcuqOJSVD8xA71borirqF1r5jB6uhB3xxwCL5yNXxmqhZx1IUjIsd0vQGiujDE7fUQqU9cL7yLLd0q8Po7DTXo8medmQJqLIDhSlPwhbeNqr5Ho8qMRWuit9IAryOIzhAKEberK5Co4wB07tTTmTGiIQRDcAPrlvGSkCC5KIa0RSamjXMK9bAHtNasrdHxOrCWEdHvzZHav6T5vuQn7H6kqoeei3fvGA1CuW2AaTso61QpsPXcvnIWQcvU9fUifliAYGbn9Hn1B9RLaGuqVwolY9RJ9f04NiXSncqtjgUTeSqNOGl0RLZEqiy0V2rag2Ik4rPSxBzrgyoWH0o0m7oayH1wi7a6y4vYCgrmINdHeuIMH2R5CuTe1JGq5PwBbjI4e091gGMysdttLGoaf0gVHFFz5Gpw0kGpkWN3JlaKJrFq4xKAvY341DgYTBCmVTDuRikoqIFcLp8irTh13NXSjARSWzvC2VrQ0qSt7thQQr3hXKjEyEGcRw15Ah6JfBP9Zgh4XITriv5EJ0y2dGGCXHOCMwhksXjcg01NtZfbjBR5Dx0mYV2RZyxNB0NjAWll0hNzP8st9rIMuTbRDPxWJXg2mrkQaKEgrEEPH\n"
 
 class TestHotfixes(unittest.TestCase):
-    
+
     def test_checksums_are_computed_correctly(self):
         value = ChecksummedFileValueType(data=DUMMY_FILE,filename=u"myfile.dat",contentType=u"application/xml")
         self.assertEquals(value.md5,"1deb2cb22eb14d3aa88e87395edb7ae3")
         self.assertEquals(value.sha1,"f4efea83f58dee0191a7835d7dc8f47b0def83ad")
-    
+
     def test_implements_correct_interfaces(self):
         value = ChecksummedFileValueType()
         self.assertTrue(IChecksummedFile.providedBy(value))
