@@ -31,8 +31,6 @@ class IHotfix(model.Schema):
     read_permission(text='plone.app.vulnerabilities.hotfix.view_release')
     text = RichText(title=_("Release body"),
                     description=_("This will be shown after the hotfix is released"),
-                    default="",
-                    allowed_mime_types=("text/html",),
                     required=False)
 
     fieldset(
@@ -44,8 +42,6 @@ class IHotfix(model.Schema):
     read_permission(preannounce_text='plone.app.vulnerabilities.hotfix.view_preannounce')
     preannounce_text = RichText(title=_("Preannounce body"),
                                 description=_("This will be shown while the hotfix is in the preannounce state"),
-                                default="",
-                                allowed_mime_types=("text/html",),
                                 required=False)
 
 
