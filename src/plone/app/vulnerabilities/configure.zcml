@@ -17,6 +17,13 @@
       description="Manage hotfixes and their associated vulnerabilities"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <gs:upgradeDepends
+      source="1"
+      destination="2"
+      title="Re-apply all registry settings"
+      profile="plone.app.vulnerabilities:default"
+      import_steps="plone.app.registry"
+      />
 
   <adapter for="plone.app.vulnerabilities.content.hotfix.IHotfix"
            provides="plone.app.vulnerabilities.content.hotfix.INameFromReleaseDate"
