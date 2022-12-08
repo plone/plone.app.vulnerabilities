@@ -42,7 +42,7 @@ class HostfixListing(BrowserView):
             version = v.split('-')[0]
             data = {
                 'name': version,
-                'date': v.split('-')[1],
+                'date': self.get_date_from_version(v),
                 'security': version in security,
                 'maintenance': version in maintenance
             }
@@ -83,6 +83,11 @@ class HostfixListing(BrowserView):
 
         return result
 
+    def get_date_from_version(self, version):
+        # This expects a version from registry['plone.versions'], like this:
+        # 4.3.1-Jun 17, 2013
+        return version.split('-')[1]
+
 
 class HostfixJSONListing(HostfixListing):
     """ Load the collection of hotfixes and perform any processing required to
@@ -94,29 +99,20 @@ class HostfixJSONListing(HostfixListing):
         self.context = context
         self.request = request
 
+    def get_date_from_version(self, version):
+        # This expects a version from registry['plone.versions'], like this:
+        # 4.3.1-Jun 17, 2013.
+        # We turn this into 2013-06-17 so callers can handle it how they like.
+        date_format = '%b %d, %Y'
+        plone_version_release_date = datetime.strptime(
+            version.split('-')[1], date_format).date()
+        return plone_version_release_date.isoformat()
+
     def __call__(self):
-        registry = getUtility(IRegistry)
-        versions = registry['plone.versions']
-        security = registry['plone.securitysupport']
-        maintenance = registry['plone.activemaintenance']
         result = []
-
-        for v in sorted(versions, reverse=True):
-            version = v.split('-')[0]
-            date_format = '%b %d, %Y'
-            plone_version_release_date = datetime.strptime(
-                v.split('-')[1], date_format).date()
-
-            vdata = {
-                'name': version,
-                'date': plone_version_release_date.isoformat(),
-                'security': version in security,
-                'maintenance': version in maintenance,
-                'hotfixes': {
-
-                }
-            }
-
+        versions = self.get_versions()
+        for vdata in versions:
+            version = vdata['name']
             applied_hotfixes = []
             for fix in self.all_hotfixes_info:
                 if version in fix["affected_versions"]:
