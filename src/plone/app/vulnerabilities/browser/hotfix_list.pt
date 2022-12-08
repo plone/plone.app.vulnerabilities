@@ -45,7 +45,7 @@
             <td tal:content="python: 'Yes' if version['maintenance'] else 'No'"  tal:attributes="class python: 'good' if version['maintenance'] else 'bad'"></td>
             <td>
               <tal:hotfixes tal:repeat="hotfix hotfixes">
-                <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a> <br/>
+                <a href="${hotfix/absolute_url}">${hotfix/getId}</a> <br/>
               </tal:hotfixes>
             </td>
           </tr>

@@ -3,6 +3,7 @@ from Products.Five.browser import BrowserView
 from datetime import datetime
 from plone.app.vulnerabilities.content.hotfix import IHotfix
 from plone.registry.interfaces import IRegistry
+from zope.cachedescriptors.property import Lazy as lazy_property
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
@@ -48,20 +49,18 @@ class HostfixListing(BrowserView):
             result.append(data)
         return result
 
+    @lazy_property
+    def _all_hotfix_objects(self):
+        return [brain.getObject() for brain in self.get_hotfixes()]
+
     def get_hotfixes_for_version(self, version):
-        # get all hotfixes
         result = []
-        context = aq_inner(self.context)
-        tools = getMultiAdapter((context, self.request), name=u'plone_tools')
 
-        portal_catalog = tools.catalog()
-        brains = portal_catalog(object_provides=IHotfix.__identifier__)
+        for hotfix in self._all_hotfix_objects:
+            if version in hotfix.getAffectedVersions():
+                result.append(hotfix)
 
-        for brain in brains:
-            if version in brain.getObject().getAffectedVersions():
-                result.append(brain)
-
-        return sorted(result, key=lambda hotfix: hotfix.id, reverse=True)
+        return result
 
 
 class HostfixJSONListing(HostfixListing):
@@ -98,9 +97,8 @@ class HostfixJSONListing(HostfixListing):
             }
 
             applied_hotfixes = []
-            fixs = self.get_hotfixes_for_version(version)
-            for f in fixs:
-                fix = f.getObject()
+            fixes = self.get_hotfixes_for_version(version)
+            for fix in fixes:
                 fix_data = {
                     'name': fix.id,
                     'url': fix.absolute_url(),
