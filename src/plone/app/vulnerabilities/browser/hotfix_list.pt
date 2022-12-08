@@ -36,16 +36,16 @@
           <th>Active Maintenance</th>
           <th>Hotfix</th>
         </thead>
-        <tal:versions repeat="version view/get_versions">
-          <tr class="" tal:define="hotfixes python: view.get_hotfixes_for_version(version['name'])"
+        <tal:versions repeat="version view/get_combined_info">
+          <tr class=""
               tal:attributes="class python:'non_supported_version' if not version['security'] and not version['maintenance'] else 'supported_version'">
             <td tal:content="version/name"></td>
             <td tal:content="version/date"></td>
             <td tal:content="python: 'Yes' if version['security'] else 'No'" tal:attributes="class python: 'good' if version['security'] else 'bad'"></td>
             <td tal:content="python: 'Yes' if version['maintenance'] else 'No'"  tal:attributes="class python: 'good' if version['maintenance'] else 'bad'"></td>
             <td>
-              <tal:hotfixes tal:repeat="hotfix hotfixes">
-                <a href="${hotfix/absolute_url}">${hotfix/getId}</a> <br/>
+              <tal:hotfixes tal:repeat="hotfix version/hotfixes">
+                <a href="${hotfix/url}">${hotfix/name}</a> <br/>
               </tal:hotfixes>
             </td>
           </tr>

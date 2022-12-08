@@ -88,6 +88,26 @@ class HostfixListing(BrowserView):
         # 4.3.1-Jun 17, 2013
         return version.split('-')[1]
 
+    def get_combined_info(self):
+        result = []
+        versions = self.get_versions()
+        for vdata in versions:
+            version = vdata['name']
+            applied_hotfixes = []
+            for fix in self.all_hotfixes_info:
+                if version in fix["affected_versions"]:
+                    # To keep the returned info exactly the same as before,
+                    # we could remove the affected_versions from a copy
+                    # and add this copy.
+                    # from copy import deepcopy
+                    # copied = deepcopy(fix)
+                    # del copied["affected_versions"]
+                    # applied_hotfixes.append(copied)
+                    applied_hotfixes.append(fix)
+            vdata['hotfixes'] = applied_hotfixes
+            result.append(vdata)
+        return result
+
 
 class HostfixJSONListing(HostfixListing):
     """ Load the collection of hotfixes and perform any processing required to
@@ -109,26 +129,10 @@ class HostfixJSONListing(HostfixListing):
         return plone_version_release_date.isoformat()
 
     def __call__(self):
-        result = []
-        versions = self.get_versions()
-        for vdata in versions:
-            version = vdata['name']
-            applied_hotfixes = []
-            for fix in self.all_hotfixes_info:
-                if version in fix["affected_versions"]:
-                    # To keep the returned info exactly the same as before,
-                    # we could remove the affected_versions from a copy
-                    # and add this copy.
-                    # from copy import deepcopy
-                    # copied = deepcopy(fix)
-                    # del copied["affected_versions"]
-                    # applied_hotfixes.append(copied)
-                    applied_hotfixes.append(fix)
-            vdata['hotfixes'] = applied_hotfixes
-            result.append(vdata)
-
         self.request.RESPONSE.setHeader('Content-Type',
                                         'application/json; charset="UTF-8"')
+
+        result = self.get_combined_info()
 
         if 'version' in self.request.form:
             requested_version = self.request.form['version']
