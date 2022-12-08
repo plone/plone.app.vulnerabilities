@@ -72,12 +72,6 @@ class HostfixListing(BrowserView):
                 'release_date': fix.release_date.isoformat(),
                 'affected_versions': fix.getAffectedVersions(),
             }
-            if fix.hotfix is not None:
-                fix_data['download_url'] = fix.absolute_url() + \
-                    '/@@download/hotfix'
-                fix_data['md5'] = fix.hotfix.md5
-                fix_data['sha1'] = fix.hotfix.sha1
-                fix_data['pypi_name'] = 'Products.PloneHotfix' + fix.id
             result.append(fix_data)
 
         return result
