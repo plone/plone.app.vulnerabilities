@@ -23,14 +23,16 @@ class HostfixListing(BrowserView):
     present the correct list to the client
     """
 
-    def get_hotfixes(self):
+    @lazy_property
+    def hotfixes(self):
         context = aq_inner(self.context)
         tools = getMultiAdapter((context, self.request), name=u'plone_tools')
 
         portal_catalog = tools.catalog()
         brains = portal_catalog(object_provides=IHotfix.__identifier__)
 
-        return sorted(brains, key=lambda hotfix: hotfix.id, reverse=True)
+        brains = sorted(brains, key=lambda hotfix: hotfix.id, reverse=True)
+        return [brain.getObject() for brain in brains]
 
     def get_versions(self):
         registry = getUtility(IRegistry)
@@ -49,14 +51,10 @@ class HostfixListing(BrowserView):
             result.append(data)
         return result
 
-    @lazy_property
-    def _all_hotfix_objects(self):
-        return [brain.getObject() for brain in self.get_hotfixes()]
-
     def get_hotfixes_for_version(self, version):
         result = []
 
-        for hotfix in self._all_hotfix_objects:
+        for hotfix in self.hotfixes:
             if version in hotfix.getAffectedVersions():
                 result.append(hotfix)
 
@@ -66,7 +64,7 @@ class HostfixListing(BrowserView):
     def all_hotfixes_info(self):
         result = []
 
-        for fix in self._all_hotfix_objects:
+        for fix in self.hotfixes:
             fix_data = {
                 'name': fix.id,
                 'url': fix.absolute_url(),

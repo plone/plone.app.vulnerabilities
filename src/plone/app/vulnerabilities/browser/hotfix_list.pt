@@ -62,8 +62,8 @@
       </header>
       <ul class="portletContent">
         <li class="portletItem"
-            tal:repeat="hotfix view/get_hotfixes">
-          <a href="" tal:attributes="href hotfix/getURL" tal:content="hotfix/id">Hotfix</a>
+            tal:repeat="hotfix view/hotfixes">
+          <a href="" tal:attributes="href hotfix/absolute_url" tal:content="hotfix/id">Hotfix</a>
         </li>
       </ul>
       <footer class="portletFooter">
