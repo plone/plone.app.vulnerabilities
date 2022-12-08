@@ -40,16 +40,24 @@ class HostfixListing(BrowserView):
         versions = registry['plone.versions']
         security = registry['plone.securitysupport']
         maintenance = registry['plone.activemaintenance']
+        requested_version = self.request.form.get('version', '')
         result = []
         for v in sorted(versions, reverse=True):
             version = v.split('-')[0]
+            if requested_version and version != requested_version:
+                continue
             data = {
                 'name': version,
                 'date': self.get_date_from_version(v),
                 'security': version in security,
                 'maintenance': version in maintenance
             }
+            if requested_version and version == requested_version:
+                return [data]
             result.append(data)
+        if requested_version:
+            # No matching version found.
+            return []
         return result
 
     def get_hotfixes_for_version(self, version):
@@ -121,15 +129,5 @@ class HostfixJSONListing(HostfixListing):
                                         'application/json; charset="UTF-8"')
 
         result = self.get_combined_info()
-
-        if 'version' in self.request.form:
-            requested_version = self.request.form['version']
-            for r in result:
-                if r['name'] == requested_version:
-                    result = r
-                    break
-            else:
-                result = None
-
         self.request.response.setBody(json.dumps(result))
         return self.request.response
