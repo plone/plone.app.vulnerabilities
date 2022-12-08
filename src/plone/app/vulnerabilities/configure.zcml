@@ -9,6 +9,7 @@
   <include package="plone.app.dexterity" />
 
   <include package=".browser" />
+  <include package=".services" />
 
   <gs:registerProfile
       name="default"
