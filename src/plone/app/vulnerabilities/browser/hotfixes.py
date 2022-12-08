@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from Products.Five.browser import BrowserView
+from copy import deepcopy
 from datetime import datetime
 from plone.app.vulnerabilities.content.hotfix import IHotfix
 from plone.registry.interfaces import IRegistry
@@ -94,14 +95,9 @@ class HostfixListing(BrowserView):
             applied_hotfixes = []
             for fix in self.all_hotfixes_info:
                 if version in fix["affected_versions"]:
-                    # To keep the returned info exactly the same as before,
-                    # we could remove the affected_versions from a copy
-                    # and add this copy.
-                    # from copy import deepcopy
-                    # copied = deepcopy(fix)
-                    # del copied["affected_versions"]
-                    # applied_hotfixes.append(copied)
-                    applied_hotfixes.append(fix)
+                    copied = deepcopy(fix)
+                    del copied["affected_versions"]
+                    applied_hotfixes.append(copied)
             vdata['hotfixes'] = applied_hotfixes
             result.append(vdata)
         return result
