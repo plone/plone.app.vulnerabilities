@@ -62,6 +62,27 @@ class HostfixListing(BrowserView):
 
         return result
 
+    @lazy_property
+    def all_hotfixes_info(self):
+        result = []
+
+        for fix in self._all_hotfix_objects:
+            fix_data = {
+                'name': fix.id,
+                'url': fix.absolute_url(),
+                'release_date': fix.release_date.isoformat(),
+                'affected_versions': fix.getAffectedVersions(),
+            }
+            if fix.hotfix is not None:
+                fix_data['download_url'] = fix.absolute_url() + \
+                    '/@@download/hotfix'
+                fix_data['md5'] = fix.hotfix.md5
+                fix_data['sha1'] = fix.hotfix.sha1
+                fix_data['pypi_name'] = 'Products.PloneHotfix' + fix.id
+            result.append(fix_data)
+
+        return result
+
 
 class HostfixJSONListing(HostfixListing):
     """ Load the collection of hotfixes and perform any processing required to
@@ -97,21 +118,16 @@ class HostfixJSONListing(HostfixListing):
             }
 
             applied_hotfixes = []
-            fixes = self.get_hotfixes_for_version(version)
-            for fix in fixes:
-                fix_data = {
-                    'name': fix.id,
-                    'url': fix.absolute_url(),
-                    'release_date': fix.release_date.isoformat(),
-                }
-                if fix.hotfix is not None:
-                    fix_data['download_url'] = fix.absolute_url() + \
-                        '/@@download/hotfix'
-                    fix_data['md5'] = fix.hotfix.md5
-                    fix_data['sha1'] = fix.hotfix.sha1
-                    fix_data['pypi_name'] = 'Products.PloneHotfix' + fix.id
-
-                applied_hotfixes.append(fix_data)
+            for fix in self.all_hotfixes_info:
+                if version in fix["affected_versions"]:
+                    # To keep the returned info exactly the same as before,
+                    # we could remove the affected_versions from a copy
+                    # and add this copy.
+                    # from copy import deepcopy
+                    # copied = deepcopy(fix)
+                    # del copied["affected_versions"]
+                    # applied_hotfixes.append(copied)
+                    applied_hotfixes.append(fix)
             vdata['hotfixes'] = applied_hotfixes
             result.append(vdata)
 
