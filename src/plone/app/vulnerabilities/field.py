@@ -1,5 +1,5 @@
 from hashlib import sha1, md5
-from zope.interface import implements
+from zope.interface import implementer
 from zope import schema
 from zope.schema.fieldproperty import FieldProperty
 from plone.namedfile.interfaces import INamedFile, INamedFileField
@@ -16,8 +16,8 @@ class IChecksummedFileField(INamedFileField):
     pass
 
 
+@implementer(IChecksummedFile)
 class ChecksummedFileValueType(FileValueType):
-    implements(IChecksummedFile)
 
     md5 = FieldProperty(IChecksummedFile['md5'])
     sha1 = FieldProperty(IChecksummedFile['sha1'])
@@ -25,16 +25,16 @@ class ChecksummedFileValueType(FileValueType):
     def _setData(self, data):
         super(ChecksummedFileValueType, self)._setData(data)
         body = self._getData()
-        self.sha1 = unicode(sha1(body).hexdigest())
-        self.md5 = unicode(md5(body).hexdigest())
+        self.sha1 = sha1(body).hexdigest()
+        self.md5 = md5(body).hexdigest()
 
     data = property(FileValueType._getData, _setData)
 
 
+@implementer(IChecksummedFileField)
 class ChecksummedFile(NamedFile):
     """ A file field which computes MD5 and SHA1 checksums for the uploaded file
     """
-    implements(IChecksummedFileField)
 
     _type = ChecksummedFileValueType
     schema = IChecksummedFile

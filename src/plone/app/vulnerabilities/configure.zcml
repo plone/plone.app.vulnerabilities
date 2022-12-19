@@ -7,10 +7,9 @@
 
   <include package="Products.CMFCore" />
   <include package="plone.app.dexterity" />
-  <include package="plone.directives.form" file="meta.zcml" />
-  <include package="plone.directives.form" />
 
   <include package=".browser" />
+  <include package=".services" />
 
   <gs:registerProfile
       name="default"
@@ -18,6 +17,13 @@
       directory="profiles/default"
       description="Manage hotfixes and their associated vulnerabilities"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <gs:upgradeDepends
+      source="1"
+      destination="2"
+      title="Re-apply all registry settings"
+      profile="plone.app.vulnerabilities:default"
+      import_steps="plone.app.registry"
       />
 
   <adapter for="plone.app.vulnerabilities.content.hotfix.IHotfix"

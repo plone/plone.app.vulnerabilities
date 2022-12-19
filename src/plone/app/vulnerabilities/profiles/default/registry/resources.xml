@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.bundles/plone.app.vulnerabilities"
+            interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="merge_with">default</value>
+    <value key="enabled">True</value>
+    <value key="jscompilation">++resource++plone.app.vulnerabilities.vulnerabilities.js</value>
+    <value key="csscompilation">++resource++plone.app.vulnerabilities.vulnerabilities.css</value>
+    <value key="last_compilation">2016-04-15 00:00:00</value>
+    <value key="compile">False</value>
+  </records>
+
+</registry>

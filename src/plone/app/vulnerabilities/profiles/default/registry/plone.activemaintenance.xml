@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<registry>
+  <record name="plone.activemaintenance">
+    <field type="plone.registry.field.Tuple">
+      <title>Active maintenance versions</title>
+      <description>A list of plone versions with active maintenance support</description>
+      <value_type type="plone.registry.field.TextLine" />
+    </field>
+    <value purge="false">
+      <element>6.0.0rc2</element>
+      <element>6.0.0rc1</element>
+      <element>6.0.0b3</element>
+      <element>6.0.0b2</element>
+      <element>6.0.0b1</element>
+      <element>6.0.0a6</element>
+      <element>6.0.0a4</element>
+      <element>6.0.0a3</element>
+      <element>6.0.0a2</element>
+      <element>6.0.0a1</element>
+      <element>5.2.10</element>
+      <element>5.2.9</element>
+      <element>5.2.8</element>
+      <element>5.2.7</element>
+      <element>5.2.6</element>
+      <element>5.2.5</element>
+      <element>5.2.4</element>
+      <element>5.2.3</element>
+      <element>5.2.2</element>
+      <element>5.2.1</element>
+      <element>5.2.0</element>
+    </value>
+  </record>
+</registry>

@@ -7,45 +7,41 @@ from plone.app.vulnerabilities.content.vulnerability import IVulnerability
 from plone.app.vulnerabilities.field import ChecksummedFile
 from plone.autoform.directives import read_permission
 from plone.dexterity.content import Container
-from plone.directives import form
+from plone.supermodel.directives import fieldset
 from plone.supermodel import model
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IHotfix(model.Schema):
     """ Marker interface for Hotfixes """
 
-    description = schema.Text(title=_(u"Summary"),
-                              description=_(u"A summary of the hotfix contents, used in item listings and search results."),
-                              default=u"")
+    description = schema.Text(title=_("Summary"),
+                              description=_("A summary of the hotfix contents, used in item listings and search results."),
+                              default="")
 
-    release_date = schema.Date(title=_(u"Release date"),
-                               description=_(u"Date the hotfix will be released"))
+    release_date = schema.Date(title=_("Release date"),
+                               description=_("Date the hotfix will be released"))
 
     read_permission(hotfix='plone.app.vulnerabilities.hotfix.view_release')
-    hotfix = ChecksummedFile(title=_(u"Hotfix"),
-                             description=_(u"Old-style product tarball for this hotfix"),
+    hotfix = ChecksummedFile(title=_("Hotfix"),
+                             description=_("Old-style product tarball for this hotfix"),
                              required=False)
 
     read_permission(text='plone.app.vulnerabilities.hotfix.view_release')
-    text = RichText(title=_(u"Release body"),
-                    description=_(u"This will be shown after the hotfix is released"),
-                    default=u"",
-                    allowed_mime_types=("text/html",),
+    text = RichText(title=_("Release body"),
+                    description=_("This will be shown after the hotfix is released"),
                     required=False)
 
-    form.fieldset(
+    fieldset(
         'preannounce',
-        label=_(u"Preannounce"),
+        label=_("Preannounce"),
         fields=['preannounce_text']
     )
 
     read_permission(preannounce_text='plone.app.vulnerabilities.hotfix.view_preannounce')
-    preannounce_text = RichText(title=_(u"Preannounce body"),
-                                description=_(u"This will be shown while the hotfix is in the preannounce state"),
-                                default=u"",
-                                allowed_mime_types=("text/html",),
+    preannounce_text = RichText(title=_("Preannounce body"),
+                                description=_("This will be shown while the hotfix is in the preannounce state"),
                                 required=False)
 
 
@@ -54,8 +50,8 @@ class INameFromReleaseDate(INameFromTitle):
         """Return a processed title"""
 
 
+@implementer(INameFromReleaseDate)
 class NameFromReleaseDate(object):
-    implements(INameFromReleaseDate)
 
     def __init__(self, context):
         self.context = context
@@ -66,13 +62,17 @@ class NameFromReleaseDate(object):
         return self.context.release_date.strftime("%Y%m%d")
 
 
+@implementer(IHotfix)
 class Hotfix(Container):
-    implements(IHotfix)
 
     @property
     def title(self):
         # Hotfixes have their ID generated from their release date.
         return self.release_date.strftime("%Y%m%d")
+
+    @title.setter
+    def title(self, value):
+        pass
 
     def released(self):
         workflowTool = getToolByName(self, "portal_workflow")
@@ -96,7 +96,10 @@ class Hotfix(Container):
 
         result = []
         for brain in brains:
-            result.extend(brain.getObject().affected_versions)
+            obj = brain.getObject()
+            affected_versions = getattr(obj.aq_base, "affected_versions", [])
+            if affected_versions:
+                result.extend(affected_versions)
 
         result = sorted(set(result), key=pkg_resources.parse_version)
         result.reverse()
