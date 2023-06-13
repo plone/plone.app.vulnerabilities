@@ -1,0 +1,8 @@
+include *.rst
+include pyproject.toml
+
+graft src/plone
+
+
+global-exclude *.pyc
+
